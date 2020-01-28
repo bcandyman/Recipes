@@ -29,23 +29,9 @@ $("#ingredient-search").keyup(function() {
         newDiv.append(hr);
         $(".returned-search-items").append(newDiv);
       });
-      //move this out of for each
-      $(".newItem").click(function() {
-        var newItem = this.name;
-        console.log("Adding New Item to Pantry: " + newItem);
-        $.ajax({
-          url: "/api/pantry/new",
-          method: "POST",
-          data: {
-            name: newItem,
-            user: userID
-          }
-        }).then(function(res) {
-          console.log(res);
-        });
-      });
     });
   }
+
   clearTimeout(ingredientSearchTimeout);
 
   var itemToSearch = $("#ingredient-search")
@@ -58,6 +44,22 @@ $("#ingredient-search").keyup(function() {
     return;
   }
   ingredientSearchTimeout = setTimeout(getAutofillData, 500);
+});
+
+//move this out of for each
+$(document).on("click", ".newItem", function() {
+  var newItem = this.name;
+  console.log("Adding New Item to Pantry: " + newItem);
+  $.ajax({
+    url: "/api/pantry/new",
+    method: "POST",
+    data: {
+      name: newItem,
+      user: userID
+    }
+  }).then(function(res) {
+    console.log(res);
+  });
 });
 
 // event listener to alter quantity of pantry item
