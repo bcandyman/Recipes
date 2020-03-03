@@ -1,31 +1,22 @@
-var db = require("../models");
-var axios = require("axios");
-require("dotenv").config();
+const axios = require('axios');
+require('dotenv').config();
 
-module.exports = function(app) {
-  app.post("/api/user/create", function(req, res) {
-    db.User.create({
-      name: req.body.name,
-      password: req.body.password
-    }).then(function(dbUser) {
-      let userId = dbUser.dataValues.id.toString();
-      res.send(userId);
-    });
+module.exports = app => {
+  app.post('/api/user/create', (req, res) => {
+    res.send('userId');
   });
 
-  app.get("/api/ingredient/search", function(req, res) {
-    var url = "https://api.spoonacular.com/food/ingredients/autocomplete";
-    var query = "?query=" + req.query.ingredientName;
-    var numResults = "&number=" + "5";
-    var apiKey = "&apiKey=" + process.env.SPOONACULAR_KEY;
-    axios.get(url + query + numResults + apiKey).then(function(response) {
+  app.get('/api/ingredient/search', (req, res) => {
+    const url = 'https://api.spoonacular.com/food/ingredients/autocomplete';
+    const query = `?query=${req.query.ingredientName}`;
+    const numResults = '&number=5';
+    const apiKey = `&apiKey=${process.env.SPOONACULAR_KEY}`;
+    axios.get(url + query + numResults + apiKey).then(response => {
       res.send(response.data);
     });
   });
 
-  app.post("/api/pantry/new", function(req) {
-    db.Ingredient.create({
-      name: req.body.name
-    }).then();
+  app.post('/api/pantry/new', (req, res) => {
+    res.send({ name: req.body.name });
   });
 };

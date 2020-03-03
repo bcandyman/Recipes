@@ -1,11 +1,10 @@
 module.exports = {
-  beginRow: function(conditional, options) {
+  beginRow: (conditional, options) => {
     if (conditional % 2 === 0) {
-      console.log(options.data.last);
       return options.fn(this);
     }
   },
-  endRow: function(conditional, options) {
+  endRow: (conditional, options) => {
     if (conditional % 2 !== 0 || options.data.last === true) {
       return options.fn(this);
     }
