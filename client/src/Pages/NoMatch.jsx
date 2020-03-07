@@ -7,11 +7,11 @@ function NoMatch() {
       <Bootstrap.Row>
         <Bootstrap.Col size="md-12">
           <Bootstrap.Jumbotron>
-            <h1>404 Page Not Found</h1>
+            <h1>Maybe you're looking for your Pantry?...</h1>
             <h1>
-              <span role="img" aria-label="Face With Rolling Eyes Emoji">
-                🙄
-              </span>
+              <a href="/pantry">
+                <img alt="colored pantry" src="https://image.flaticon.com/icons/svg/1606/1606731.svg" height="100px"></img>
+              </a>
             </h1>
           </Bootstrap.Jumbotron>
         </Bootstrap.Col>
