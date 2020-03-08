@@ -1,8 +1,14 @@
 const axios = require('axios');
-// const db = require('../models');
 const ingredientController = require('../controllers/ingredientController');
 const userController = require('../controllers/userController');
 require('dotenv').config();
+
+
+const pushIngredientToUser = (userId, ingredientId, res) => {
+  userController.newAddIngredient(userId, ingredientId)
+    .then(res.send('savedIngredient'))
+    .catch(err => res.send(err));
+};
 
 
 let ingredientSearchTimeout = {};
@@ -26,7 +32,15 @@ module.exports = app => {
 
 
 
+
+
+
+
+
+
   
+
+
   app.post('/api/pantry/ingredient', (req, res) => {
     ingredientController.findOneOrCreate({ name: req.body.name }, res);
   });
@@ -36,13 +50,18 @@ module.exports = app => {
   });
 
   app.post('/api/user/ingredient', (req, res) => {
-    console.log(req.body.name);
-    ingredientController.findOneOrCreate({ name: req.body.name }, res);
-    //.then(//data => {
-    //userController.addIngredient(data, res);
-    //res.send('finished!');
-    // }
-    //);
-    // userController.addIngredient(req.body, res);
+    ingredientController.newFindOne({ name: req.body.name })
+      .then(searchedData => {
+        if (searchedData === null) {
+          // if data was not found in the database
+          ingredientController.newCreate({ name: req.body.name })
+            .then(createdData => pushIngredientToUser('5e63e43bb450356a2a0cae14', createdData.id, res))
+            .catch(err => res.send(err));
+        } else {
+          // if data was found in the database
+          pushIngredientToUser('5e63e43bb450356a2a0cae14', searchedData.id, res);
+        }
+      })
+      .catch(err => res.send(err));
   });
 };

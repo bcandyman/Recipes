@@ -16,4 +16,9 @@ module.exports = {
       .then(res.send('savedIngredient'))
       .catch(err => res.send(err));
   },
+
+  newAddIngredient: (userId, ingredientId) => db.User.findOneAndUpdate(
+    { _id: userId },
+    { $push: { ingredients: { ingredientId } } },
+  ),
 };
