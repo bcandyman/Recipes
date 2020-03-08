@@ -1,30 +1,28 @@
-module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define(
-    "User",
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
+
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  ingredients: [
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1]
-        }
+      ingredientId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Ingredient',
       },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1]
-        }
+      quantity: {
+        type: Number,
+        default: 0,
       },
-      pantryKey: {
-        type: DataTypes.STRING(100).BINARY,
-        defaultValue: ""
-      }
-    },
-    {
-      tableName: "Users",
-      timestamps: false
-    }
-  );
-  return User;
-};
+      unit: {
+        type: String,
+      },
+    }],
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

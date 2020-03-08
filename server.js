@@ -1,47 +1,21 @@
-require("dotenv").config();
-const express = require("express");
-const exphbs = require("express-handlebars");
-const hbsHelpers = require("./views/helpers/helpers.js");
-const db = require("./models");
+require('dotenv').config();
+require('./config/connection');
+const express = require('express');
+
 const app = express();
 const PORT = process.env.PORT || 8080;
+
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
 
-const hbs = {
-  defaultLayout: "main",
-  helpers: hbsHelpers
-};
-
-// Handlebars
-app.engine("handlebars", exphbs(hbs));
-
-app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require('./routes/apiRoutes')(app);
 
-var syncOptions = { force: false };
 
-// If running a test, set syncOptions.force to true
-// clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
-
-// Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
-  });
-});
+// Starting the server
+app.listen(PORT, () => console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT));
 
 module.exports = app;

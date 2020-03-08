@@ -1,18 +1,5 @@
-var mysql = require("mysql");
+const mongoose = require('mongoose');
 
-var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "root",
-  database: "recipesDB"
-});
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pantry';
 
-connection.connect(function(err) {
-  if (err) {
-    throw err;
-  }
-  console.log("connected as id: " + connection.threadId);
-});
-
-module.exports = connection;
+module.exports = mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
