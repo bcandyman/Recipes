@@ -8,7 +8,7 @@ import
     Card, 
     Form } from 'react-bootstrap'
 
-function Signup () {
+function Login () {
 
 
     return (
@@ -20,23 +20,13 @@ function Signup () {
         <Form>
             <ListGroup variant="flush">
                 <ListGroup.Item>
-                    <Form.Control placeholder='@username'></Form.Control>
+                    <Form.Control autoComplete="username" placeholder='@username'></Form.Control>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Form.Row>
-                        <Col>
-                            <Form.Control placeholder="First name" />
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Last name" />
-                        </Col>
-                    </Form.Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <Form.Control placeholder="password"></Form.Control>
+                    <Form.Control type="password" placeholder="password"></Form.Control>
                 </ListGroup.Item>
             </ListGroup>
-            <Button className="mx-3 my-3">Submit</Button>
+            <Button className="mx-3 my-3">Log Me In!</Button>
         </Form>
         </Card>
         </Col>
@@ -47,4 +37,4 @@ function Signup () {
 
 }
 
-export default Signup
+export default Login

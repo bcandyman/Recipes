@@ -12,6 +12,8 @@ import './Pantry.css'
 
 function Pantry() {
 
+
+
   const [ingredients, setIngredients] = useState([])
 
   useEffect(() => {
