@@ -10,7 +10,7 @@ import './App.css'
 function App() {
   return (
   <Router>
-      <Navbar bg="light" className="mb-3">
+      <Navbar className="mb-3">
         <Navbar.Brand className="mr-auto"><img alt="colored pantry" src="https://image.flaticon.com/icons/svg/1606/1606731.svg" height="25px"></img> Pantry</Navbar.Brand>
         <NavDropdown title="Navigation" id="basic-nav-dropdown">
             <NavDropdown.Item href="/signup">Create an Account</NavDropdown.Item>
