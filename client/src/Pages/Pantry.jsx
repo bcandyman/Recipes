@@ -7,23 +7,25 @@ import
   Button, 
   Container, 
   Card, 
-  Form } from 'react-bootstrap'
-import './Pantry.css'
+  Form 
+} from 'react-bootstrap'
+import { useDebounce } from 'use-debounce'
 
 function Pantry() {
 
-
-
   const [ingredients, setIngredients] = useState([])
+  const [text, setText] = useState('')
+  const [search] = useDebounce(text, 2000)
 
   useEffect(() => {
     console.log('Get Ingredients from the Database');
-  }, []);
-
-  const handleOnKeyUp = e => {
-    API.getIngredients(e.target.value).then(res => {
+    API.getIngredients(search).then(res => {
       setIngredients(res.data)
     })
+  }, [search]);
+
+  const handleChange = e => {
+    setText(e.target.value)
   };
 
   const handleOnClick = e => {
@@ -42,7 +44,7 @@ function Pantry() {
               <Card.Title className="text-center py-3">
                 Add Ingredients
               </Card.Title>
-              <Form.Control isValid onKeyUp={handleOnKeyUp} placeholder='start typing to find your ingredient' />
+              <Form.Control isValid onChange={handleChange} placeholder='start typing to find your ingredient' />
               {/* <input className='w-100' onKeyUp={handleOnKeyUp} placeholder='start typing to find your ingredient' /> */}
               <ListGroup>
                 {ingredients.map((val, index) => (

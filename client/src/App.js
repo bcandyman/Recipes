@@ -5,12 +5,11 @@ import Signup from './Pages/Signup';
 import Login from './Pages/Login'
 import NoMatch from './Pages/NoMatch';
 import {Navbar, NavDropdown} from 'react-bootstrap'
-// import './App.css'
+import './App.css'
 
 function App() {
   return (
   <Router>
-    <div>
       <Navbar bg="light" className="mb-3">
         <Navbar.Brand className="mr-auto"><img alt="colored pantry" src="https://image.flaticon.com/icons/svg/1606/1606731.svg" height="25px"></img> Pantry</Navbar.Brand>
         <NavDropdown title="Navigation" id="basic-nav-dropdown">
@@ -36,7 +35,6 @@ function App() {
       <Navbar fixed="bottom">
         Pantry is a React app created by Ben Candy and Lakshdeep Bajwa
       </Navbar>
-    </div>
   </Router>
   )
 }
