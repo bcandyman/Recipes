@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import NoMatch from './Pages/NoMatch';
 import { Navbar, NavDropdown } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 
 function App() {
@@ -16,18 +17,18 @@ function App() {
         <Navbar.Brand className="mr-auto"><img alt="colored pantry" src="https://image.flaticon.com/icons/svg/1606/1606731.svg" height="25px"></img> Pantry</Navbar.Brand>
         {/* <Navbar.Text>Logged in as: </Navbar.Text> <NavLink href="/profile"> Lakshdeep Bajwa</NavLink> */}
         <NavDropdown title="Navigation" id="basic-nav-dropdown">
-          <NavDropdown.Item>
-            <Link to='/signup'>Create an Account</Link>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <Link to='/login'>Login</Link>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <Link to="/pantry">My Pantry</Link>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <Link to="/profile">My Profile</Link>
-          </NavDropdown.Item>
+          <LinkContainer to="/signup">
+            <NavDropdown.Item>Signup</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/login">
+            <NavDropdown.Item>Login</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/pantry">
+            <NavDropdown.Item>My Pantry</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/profile">
+            <NavDropdown.Item>My Profile</NavDropdown.Item>
+          </LinkContainer>
         </NavDropdown>
       </Navbar>
       <Switch>
