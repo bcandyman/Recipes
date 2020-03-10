@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 import API from '../utils/API';
 import {
   Row,
@@ -18,16 +19,20 @@ function Pantry() {
   const [userIngredients, setUserIngredients] = useState([]);
   // used as a trigger update user pantry and avoid loop from updating userIngredients within useEffect hook.
   const [updatedItems, setUpdatedItems] = useState(0);
+  const [text, setText] = useState('');
+  const [search] = useDebounce(text, 2000);
 
   useEffect(() => {
     API.getUserIngredients('userId')
       .then(res => setUserIngredients(res.data.ingredients))
   }, [updatedItems]);
 
-  const handleOnKeyUp = e => {
-    API.getIngredients(e.target.value)
-      .then(res => setIngredients(res.data))
-  };
+  useEffect(() => {
+    API.getIngredients(search)
+      .then(res => setIngredients(res.data));
+  }, [search]);
+
+  const handleOnKeyUp = e => setText(e.target.value);
 
   const handleOnAdd = e => {
     if (userIngredients.filter(item => item.ingredientId.name === e.target.value).length > 0) {
@@ -53,7 +58,6 @@ function Pantry() {
               Add Ingredients
               </Card.Title>
             <Form.Control isValid onKeyUp={handleOnKeyUp} placeholder='start typing to find your ingredient' />
-            {/* <input className='w-100' onKeyUp={handleOnKeyUp} placeholder='start typing to find your ingredient' /> */}
             <ListGroup>
               {ingredients.map((val, index) => (
                 <ListGroup.Item key={index}>
