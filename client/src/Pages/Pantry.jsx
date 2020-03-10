@@ -13,13 +13,17 @@ import './Pantry.css'
 
 function Pantry() {
 
-  const [ingredients, setIngredients] = useState([])
-  const [userIngredients, setUserIngredients] = useState([])
+  // contains ingredients returned from API from searching for new ingredients
+  const [ingredients, setIngredients] = useState([]);
+  // contains ingredients owned by the user
+  const [userIngredients, setUserIngredients] = useState([]);
+  // used as a trigger update user pantry and avoid loop from updating userIngredients within useEffect hook.
+  const [updatedItems, setUpdatedItems] = useState(0);
 
   useEffect(() => {
     API.getUserIngredients('userId')
       .then(res => setUserIngredients(res.data.ingredients))
-  }, []);
+  }, [updatedItems]);
 
   const handleOnKeyUp = e => {
     API.getIngredients(e.target.value)
@@ -27,16 +31,18 @@ function Pantry() {
   };
 
   const handleOnAdd = e => {
-    console.log(e.target.value)
-    API.addUserIngredient('5e63e43bb450356a2a0cae14', e.target.value)
-      .then(res => console.log(res)
-      )
+    if (userIngredients.filter(item => item.ingredientId.name === e.target.value).length > 0) {
+      alert('This item is already in your inventory!')
+    }
+    else {
+      API.addUserIngredient('5e63e43bb450356a2a0cae14', e.target.value)
+        .then(setUpdatedItems(updatedItems + 1));
+    }
   };
 
   const handleOnRemove = e => {
     API.removeUserIngredient('5e63e43bb450356a2a0cae14', e.target.value)
-      .then(res => console.log(res)
-      )
+      .then(setUpdatedItems(updatedItems + 1));
   };
 
   return (
