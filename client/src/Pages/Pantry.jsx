@@ -20,10 +20,10 @@ function Pantry() {
   // used as a trigger update user pantry and avoid loop from updating userIngredients within useEffect hook.
   const [updatedItems, setUpdatedItems] = useState(0);
   const [text, setText] = useState('');
-  const [search] = useDebounce(text, 2000);
+  const [search] = useDebounce(text, 500);
 
   useEffect(() => {
-    API.getUserIngredients('userId')
+    API.getUserIngredients('5e63e43bb450356a2a0cae14')
       .then(res => setUserIngredients(res.data.ingredients))
   }, [updatedItems]);
 
@@ -32,7 +32,14 @@ function Pantry() {
       .then(res => setIngredients(res.data));
   }, [search]);
 
-  const handleOnKeyUp = e => setText(e.target.value);
+  const handleOnKeyUp = e => {
+    if (e.target.value !== '') {
+      setText(e.target.value);
+    }
+    else{
+      setIngredients([])
+    }
+  };
 
   const handleOnAdd = e => {
     if (userIngredients.filter(item => item.ingredientId.name === e.target.value).length > 0) {
