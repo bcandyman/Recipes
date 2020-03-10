@@ -23,8 +23,10 @@ module.exports = app => {
       .then(response => res.send(response.data));
   });
 
-  app.get('/api/user/ingredients', (req, res) => {
-    userController.newFindOne({ _id: '5e63e43bb450356a2a0cae14' })
+  app.get('/api/ingredient/search', (req, res) => res.send([]));
+
+  app.get('/api/user/ingredients/:userId', (req, res) => {
+    userController.newFindOne({ _id: req.params.userId })
       .populate('ingredients.ingredientId')
       .then(data => res.send(data))
       .catch(err => res.send(err));
