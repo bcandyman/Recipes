@@ -11,26 +11,17 @@ const pushIngredientToUser = (userId, ingredientId, res) => {
 };
 
 
-let ingredientSearchTimeout = {};
-
 module.exports = app => {
-  app.post('/api/user/create', (req, res) => {
-    res.send('userId');
-  });
-
+  // app.post('/api/user/create', (req, res) => {
+  //   res.send('userId');
+  // });
 
   app.get('/api/ingredient/search/:ingredientName', (req, res) => {
-    const executeCall = () => {
-      const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;
-      const apiKey = process.env.SPOONACULAR_KEY;
-      axios.get(url + apiKey).then(response => {
-        res.send(response.data);
-      });
-    };
-    clearTimeout(ingredientSearchTimeout);
-    ingredientSearchTimeout = setTimeout(executeCall, 1000);
+    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;
+    const apiKey = process.env.SPOONACULAR_KEY;
+    axios.get(url + apiKey)
+      .then(response => res.send(response.data));
   });
-
 
   app.get('/api/user/ingredients', (req, res) => {
     userController.newFindOne({ _id: '5e63e43bb450356a2a0cae14' })
@@ -39,24 +30,14 @@ module.exports = app => {
       .catch(err => res.send(err));
   });
 
-
   app.post('/api/pantry/ingredient', (req, res) => {
     ingredientController.findOneOrCreate({ name: req.body.name }, res);
   });
-
-
-  // remove an ingredient item from the user
-  app.delete('/api/user/ingredient/:userId/:ingredientId', (req, res) => {
-    userController.newRemoveIngredient(req.params.userId, req.params.ingredientId)
-      .then(res.sendStatus(200));
-  });
-
 
   // create a new user
   app.post('/api/user', (req, res) => {
     userController.create(req.body, res);
   });
-
 
   // add an ingredient item to the user
   app.post('/api/user/ingredient/:userId/:ingredientName', (req, res) => {
@@ -73,5 +54,11 @@ module.exports = app => {
         }
       })
       .catch(err => res.send(err));
+  });
+
+  // remove an ingredient item from the user
+  app.delete('/api/user/ingredient/:userId/:ingredientId', (req, res) => {
+    userController.newRemoveIngredient(req.params.userId, req.params.ingredientId)
+      .then(res.sendStatus(200));
   });
 };
