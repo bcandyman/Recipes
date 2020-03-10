@@ -9,7 +9,6 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
-import './Pantry.css'
 
 function Pantry() {
 
