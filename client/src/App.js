@@ -5,8 +5,10 @@ import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import NoMatch from './Pages/NoMatch';
-import {Navbar, NavDropdown, NavLink} from 'react-bootstrap'
+import {Navbar, NavDropdown} from 'react-bootstrap'
 import './App.css'
+import RecipeList from './Pages/RecipeList';
+import Deets from './Pages/Deets'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <NavDropdown.Item href="/login">Login</NavDropdown.Item>
             <NavDropdown.Item href="/pantry">My Pantry</NavDropdown.Item>
             <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/recipelist">My Recipes</NavDropdown.Item>
+            <NavDropdown.Item href="/recipedetails">Recipe Details</NavDropdown.Item>
         </NavDropdown>
       </Navbar>
       <Switch>
@@ -33,6 +37,12 @@ function App() {
         </Route>
         <Route exact path='/profile'>
           <Profile />
+        </Route>
+        <Route exact path='/recipelist'>
+          <RecipeList />
+        </Route>
+        <Route exact path='/recipedetails'>
+          <Deets />
         </Route>
         <Route>
           <NoMatch />
