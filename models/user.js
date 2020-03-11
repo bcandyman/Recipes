@@ -12,6 +12,7 @@ const userSchema = new Schema({
       ingredientId: {
         type: Schema.Types.ObjectId,
         ref: 'Ingredient',
+        unique: true,
       },
       quantity: {
         type: Number,

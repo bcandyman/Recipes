@@ -7,13 +7,15 @@ module.exports = {
       .catch(err => res.send(err));
   },
 
-  addIngredient: (req, res) => {
-    //user._id = 5e63cd53c8db8a681db36649
-    db.User.findOneAndUpdate(
-      { _id: '5e63e43bb450356a2a0cae14' },
-      { $push: { ingredients: { ingredientId: '5e63232003108061d92fa38c' } } },
-    )
-      .then(res.send('savedIngredient'))
-      .catch(err => res.send(err));
-  },
+  newAddIngredient: (userId, ingredientId) => db.User.findOneAndUpdate(
+    { _id: userId },
+    { $push: { ingredients: { ingredientId } } },
+  ),
+
+  newRemoveIngredient: (userId, ingredientId) => db.User.updateOne(
+    { _id: userId },
+    { $pull: { ingredients: { _id: ingredientId } } },
+  ),
+
+  newFindOne: findWhat => db.User.findOne(findWhat),
 };
