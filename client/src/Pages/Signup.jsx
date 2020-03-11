@@ -8,9 +8,26 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
+import API from '../utils/API';
 
 function Signup() {
 
+  const handleOnSubmit = e => {
+    e.preventDefault()
+
+    console.log(e.target.userName.value);
+    console.log(e.target.userName.value);
+    console.log(e.target.firstName.value);
+    console.log(e.target.lastName.value);
+    console.log(e.target.password.value);
+
+    API.createNewUser(
+      e.target.userName.value,
+      e.target.firstName.value,
+      e.target.lastName.value,
+      e.target.password.value,
+    ).then(console.log('ok'))
+  };
 
   return (
     <Container>
@@ -18,26 +35,26 @@ function Signup() {
         <Col md={6}>
           <Card className="signup-card">
             <Card.Title className="text-center py-3">Create an Account</Card.Title>
-            <Form>
+            <Form onSubmit={handleOnSubmit}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <Form.Control placeholder='@username'></Form.Control>
+                  <Form.Control name='userName' placeholder='@username'></Form.Control>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Form.Row>
                     <Col>
-                      <Form.Control placeholder="First name" />
+                      <Form.Control name='firstName' placeholder="First name" />
                     </Col>
                     <Col>
-                      <Form.Control placeholder="Last name" />
+                      <Form.Control name='lastName' placeholder="Last name" />
                     </Col>
                   </Form.Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Form.Control placeholder="password"></Form.Control>
+                  <Form.Control name='password' placeholder="password"></Form.Control>
                 </ListGroup.Item>
               </ListGroup>
-              <Button className="mx-3 my-3">Submit</Button>
+              <Button type="submit" className="mx-3 my-3">Submit</Button>
             </Form>
           </Card>
         </Col>

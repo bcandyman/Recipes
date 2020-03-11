@@ -1,7 +1,7 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "recipe-server",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "Recipe Server",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -19,9 +19,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^5.1.0",
+    "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.3"
   },
   "devDependencies": {

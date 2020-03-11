@@ -1,4 +1,6 @@
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const ingredientController = require('../controllers/ingredientController');
 const userController = require('../controllers/userController');
 require('dotenv').config();
@@ -15,6 +17,44 @@ module.exports = app => {
   // app.post('/api/user/create', (req, res) => {
   //   res.send('userId');
   // });
+
+
+  app.post('/api/user/signup', async (req, res) => {
+
+    // const email = req.body.email.toLowerCase();
+
+    // //hash our password
+    bcrypt.hash(req.body.password, 10).then(function(data) { });
+    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+    const data = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      userName: req.body.userName,
+      password: encryptedPassword,
+    };
+
+    // //create the user in the database
+    const user = userController.create({ data })
+      .then(incomingData => console.log(incomingData.id));
+
+    const token = jwt.sign({ id: user.id }, process.env.APP_SECRET);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365
+    });
+
+    res.send('user');
+
+
+
+  });
+
+
+
+
+
+
 
   app.get('/api/ingredient/search/:ingredientName', (req, res) => {
     const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;

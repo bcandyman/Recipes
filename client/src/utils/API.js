@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default {
 
+  createNewUser: (firstName, lastName, userName, password) => {
+    return axios.post('/api/user/signup', { firstName, lastName, userName, password })
+  },
+
   getIngredients: (ingredientName) => {
     return axios.get(`/api/ingredient/search/${ingredientName}`)
   },
