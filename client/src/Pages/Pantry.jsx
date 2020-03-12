@@ -8,7 +8,8 @@ import {
   Button,
   Container,
   Card,
-  Form
+  Form,
+  Spinner
 } from 'react-bootstrap'
 
 function Pantry() {
@@ -24,7 +25,9 @@ function Pantry() {
 
   useEffect(() => {
     API.getUserIngredients('userId')
-      .then(res => setUserIngredients(res.data.ingredients))
+      .then(res => {
+        setUserIngredients(res.data.ingredients)
+      })
   }, [updatedItems]);
 
   useEffect(() => {
@@ -39,13 +42,13 @@ function Pantry() {
       alert('This item is already in your inventory!')
     }
     else {
-      API.addUserIngredient('5e63e43bb450356a2a0cae14', e.target.value)
+      API.addUserIngredient('5e684ff780c3e403d4f4a2d6', e.target.value)
         .then(setUpdatedItems(updatedItems + 1));
     }
   };
 
   const handleOnRemove = e => {
-    API.removeUserIngredient('5e63e43bb450356a2a0cae14', e.target.value)
+    API.removeUserIngredient('5e684ff780c3e403d4f4a2d6', e.target.value)
       .then(setUpdatedItems(updatedItems + 1));
   };
 
@@ -55,16 +58,18 @@ function Pantry() {
         <Col md={6}>
           <Card className="ingredient-search">
             <Card.Title className="text-center py-3">
-              Add Ingredients
-              </Card.Title>
+              Add Ingredients 
+            </Card.Title>       
+            <Spinner animation="border" variant="warning" />
             <Form.Control isValid onKeyUp={handleOnKeyUp} placeholder='start typing to find your ingredient' />
             <ListGroup>
-              {ingredients.map((val, index) => (
+              {ingredients!= null?
+              ingredients.map((val, index) => (
                 <ListGroup.Item key={index}>
                   <Button size="sm" variant="success" className='mr-3' name='searched-ingredient' value={val.name} onClick={handleOnAdd}>✚</Button>
                   {val.name}
                 </ListGroup.Item>
-              ))}
+              )): null}
             </ListGroup>
           </Card>
         </Col>
@@ -74,12 +79,13 @@ function Pantry() {
               My Ingredients
                 </Card.Title>
             <ListGroup>
-              {userIngredients.map((val, index) => (
+              {userIngredients!= null? 
+              userIngredients.map((val, index) => (
                 <ListGroup.Item key={index}>
                   <Button size="sm" variant="danger" className='mr-3' name='searched-ingredient' value={val._id} onClick={handleOnRemove}>-</Button>
                   {val.ingredientId.name}
                 </ListGroup.Item>
-              ))}
+              )):null}
             </ListGroup>
           </Card>
         </Col>
