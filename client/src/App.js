@@ -23,6 +23,7 @@ function App() {
             <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
             <NavDropdown.Item href="/recipelist">My Recipes</NavDropdown.Item>
             <NavDropdown.Item href="/recipedetails">Recipe Details</NavDropdown.Item>
+            <NavDropdown.Item href="/signout">Sign Out</NavDropdown.Item>
         </NavDropdown>
       </Navbar>
       <Switch>
