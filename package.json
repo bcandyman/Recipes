@@ -1,7 +1,7 @@
 {
-  "name": "recipe-server",
+  "name": "Pantry-Server",
   "version": "1.0.0",
-  "description": "Recipe Server",
+  "description": "The server for the Pantry app including the app itself.",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
