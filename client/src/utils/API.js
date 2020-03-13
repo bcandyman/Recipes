@@ -2,12 +2,22 @@ import axios from "axios";
 
 export default {
 
+  createNewUser: (userData) => {
+    return axios.post('/api/user/signup', userData);
+  },
+
+  getUser: (userName, password) => {
+    // console.log(userData);
+    // return
+    return axios.post(`/api/user/login/${userName}/${password}`);
+  },
+
   getIngredients: (ingredientName) => {
     return axios.get(`/api/ingredient/search/${ingredientName}`)
   },
 
   getUserIngredients: (userId) => {
-    return axios.get('api/user/ingredients');
+    return axios.get(`api/user/ingredients/${userId}`);
   },
 
   removeUserIngredient: (userId, ingredientId) => {

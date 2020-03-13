@@ -1,11 +1,7 @@
 const db = require('../models');
 
 module.exports = {
-  create: (req, res) => {
-    db.User.create(req)
-      .then(data => res.send(data))
-      .catch(err => res.send(err));
-  },
+  create: (userData) => db.User.create(userData.data),
 
   newAddIngredient: (userId, ingredientId) => db.User.findOneAndUpdate(
     { _id: userId },
