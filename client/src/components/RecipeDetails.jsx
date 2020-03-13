@@ -1,19 +1,18 @@
-import React from 'react'
+import  React from 'react'
 import {
     Card,
     Container,
-    Row,
-    Col,
     Table,
     Button
 } from 'react-bootstrap'
 import './RecipeDetails.css'
 
 export default function RecipeDetails () {
+
     return(
         <Card md={4} className="ml-3 mt-3">
             <Container className="recipe-header">
-                <Card.Title className="py-2 mr-auto"> Whole Wheat Crêpes </Card.Title>
+                <Card.Title className="py-2 mr-auto"> {recipeTitle} </Card.Title>
             </Container>
             <Button size="sm" variant="success" className="mb-1" name='add-favorite'>Add Recipe to Favorites</Button>
             <Card.Img src="https://spoonacular.com/recipeImages/665280-556x370.jpg"></Card.Img>

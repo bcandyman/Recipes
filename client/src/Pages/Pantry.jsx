@@ -57,7 +57,7 @@ function Pantry() {
       <Row>
         <Col md={6}>
           <Card className="ingredient-search">
-            <Card.Title className="text-center py-3">
+            <Card.Title className="text-center py-3" >
               Add Ingredients 
             </Card.Title>       
             <Spinner animation="border" variant="warning" />

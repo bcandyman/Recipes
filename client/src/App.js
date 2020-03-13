@@ -5,9 +5,9 @@ import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import NoMatch from './Pages/NoMatch';
-import {Navbar, NavDropdown} from 'react-bootstrap'
-import './App.css'
 import RecipeList from './Pages/RecipeList';
+import {Navbar, NavDropdown, NavLink} from 'react-bootstrap'
+import './App.css'
 import Deets from './Pages/Deets'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   <Router>
       <Navbar className="mb-3">
         <Navbar.Brand className="mr-auto"><img alt="colored pantry" src="https://image.flaticon.com/icons/svg/1606/1606731.svg" height="25px"></img> Pantry</Navbar.Brand>
-        {/* <Navbar.Text>Logged in as: </Navbar.Text> <NavLink href="/profile"> Lakshdeep Bajwa</NavLink> */}
+        <Navbar.Text>Logged in as: </Navbar.Text> <NavLink href="/profile"> Lakshdeep Bajwa</NavLink>
         <NavDropdown title="Navigation" id="basic-nav-dropdown">
             <NavDropdown.Item href="/signup">Create an Account</NavDropdown.Item>
             <NavDropdown.Item href="/login">Login</NavDropdown.Item>

@@ -1,30 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-    Card,
     Container,
     Row,
     Col,
-    Table
 } from 'react-bootstrap'
 import RecipeDetails from '../components/RecipeDetails'
+import API from '../utils/API'
 
 export default function Deets () {
+
+    const [recipeDetails, setRecipeDetails] = useState([])
+
+    useEffect(() => {
+        API.getRandomRecipe(3).then((results)=>{
+            setRecipeDetails(results.data)
+        })
+    },[RecipeDetails])
+
     return(
+        
         <Container>
             <Row>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
-            </Row>
-            <Row>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
-            </Row>
-            <Row>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
-                <Col><RecipeDetails></RecipeDetails></Col>
+                
+                recipeDetails.map((recipeTitle)=>{
+                    <RecipeDetails recipeTitle={recipeTitle}/>
+                })
+                
             </Row>
         </Container>
     )
