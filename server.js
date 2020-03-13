@@ -29,4 +29,4 @@ require('./routes/apiRoutes')(app);
 // Starting the server
 app.listen(PORT, () => console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT));
 
-module.exports = app;
+// module.exports = app;

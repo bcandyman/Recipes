@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Pantry from './Pages/Pantry';
 import Signup from './Pages/Signup';
@@ -10,6 +10,24 @@ import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 
 function App() {
+//5e69aad13b2b27de661bf9c6
+  const [userId, setUserId] = useState('');
+  console.log('app');
+
+  useEffect(() => {
+    console.log('from use effect');
+    console.log('userId');
+    console.log(userId);
+  }, [])
+
+
+  const onHandleUserActivate = (userIdInfo) => {
+    console.log('ppppppppppppp');
+    console.log(userIdInfo);
+    
+    setUserId(userIdInfo)
+  };
+
 
   return (
     <Router>
@@ -32,8 +50,8 @@ function App() {
         </NavDropdown>
       </Navbar>
       <Switch>
-        <Route exact path='/pantry' component={Pantry} />
-        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/pantry' render={(props) => <Pantry userId={userId} onHandleUserActivate={onHandleUserActivate} />} />
+        <Route exact path='/signup' render={(props) => <Signup onHandleUserActivate={onHandleUserActivate} />} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/profile' component={Profile} />
         <Route component={NoMatch} />

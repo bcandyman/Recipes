@@ -10,24 +10,21 @@ import {
 } from 'react-bootstrap'
 import API from '../utils/API';
 
-function Signup() {
+function Signup({ onHandleUserActivate }) {
 
   const handleOnSubmit = e => {
     e.preventDefault()
 
-    console.log(e.target.userName.value);
-    console.log(e.target.userName.value);
-    console.log(e.target.firstName.value);
-    console.log(e.target.lastName.value);
-    console.log(e.target.password.value);
-
-    API.createNewUser(
-      e.target.userName.value,
-      e.target.firstName.value,
-      e.target.lastName.value,
-      e.target.password.value,
-    ).then(console.log('ok'))
-  };
+    API.createNewUser({
+      userName: e.target.userName.value,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      password: e.target.password.value
+    }).then(data => {
+      console.log('data.data.id')
+      onHandleUserActivate(data.data.id)
+    });
+  }
 
   return (
     <Container>

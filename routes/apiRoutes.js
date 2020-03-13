@@ -18,13 +18,67 @@ module.exports = app => {
   //   res.send('userId');
   // });
 
+  app.get('/api/user/authenticate', (req, res) => res.json(req.user));
+
+
+
+
+
+
+
+  app.post('/api/user/login/:userName/:password', async (req, res) => {
+    console.log('99999999999999999999');
+    console.log(req.params.userName);
+    console.log(req.params.password);
+    console.log('))))))))))))))(((((((((((((((');
+
+    userController.newFindOne({ userName: req.params.userName })
+      .then(incomingData => {
+        console.log(incomingData);
+
+
+        // const user = await db.User.findOne({
+        // where: {
+        // email: req.body.email
+        // }
+        // });
+
+        if (!incomingData.userName) {
+          res.json('NO USER FOUND WITH THAT EMAIL');
+        }
+
+        const valid = bcrypt.compare(req.params.password, incomingData.password);
+
+        if (!valid) {
+          res.json('INCORRECT PASSWORD ENTERED');
+        }
+
+        // //create our cookie
+        const token = jwt.sign({ id: incomingData.id }, process.env.APP_SECRET);
+
+        res.cookie('token', token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 * 365,
+        });
+
+        res.json('user');
+      });
+  });
+
+
+
+
+
+
+
+
+
 
   app.post('/api/user/signup', async (req, res) => {
-
     // const email = req.body.email.toLowerCase();
 
     // //hash our password
-    bcrypt.hash(req.body.password, 10).then(function(data) { });
+    // bcrypt.hash(req.body.password, 10).then((data) => { });
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     const data = {
       firstName: req.body.firstName,
@@ -33,28 +87,18 @@ module.exports = app => {
       password: encryptedPassword,
     };
 
-    // //create the user in the database
-    const user = userController.create({ data })
-      .then(incomingData => console.log(incomingData.id));
-
-    const token = jwt.sign({ id: user.id }, process.env.APP_SECRET);
-
-    res.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365
-    });
-
-    res.send('user');
-
-
-
+    // // //create the user in the database
+    userController.create({ data })
+      .then(incomingData => {
+        const token = jwt.sign({ id: incomingData.id }, process.env.APP_SECRET);
+        res.cookie('token', token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 * 365,
+        });
+        res.json({ id: incomingData.id });
+      })
+      .catch(err => res.send(err));
   });
-
-
-
-
-
-
 
   app.get('/api/ingredient/search/:ingredientName', (req, res) => {
     const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;
