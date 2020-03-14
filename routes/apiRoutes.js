@@ -1,8 +1,6 @@
 const app = require('express').Router();
-const axios = require('axios');
 const ingredientController = require('../controllers/ingredientController');
 const userController = require('../controllers/userController');
-require('dotenv').config();
 
 
 const pushIngredientToUser = (userId, ingredientId, res) => {
@@ -10,16 +8,6 @@ const pushIngredientToUser = (userId, ingredientId, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 };
-
-
-app
-  .route('/ingredient/search/:ingredientName')
-  .get((req, res) => {
-    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;
-    const apiKey = process.env.SPOONACULAR_KEY;
-    axios.get(url + apiKey)
-      .then(response => res.send(response.data));
-  });
 
 
 app
