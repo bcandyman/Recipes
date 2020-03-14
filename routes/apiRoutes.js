@@ -61,6 +61,11 @@ module.exports = app => {
       .catch(err => res.send(err));
   });
 
+  app.get('/api/user/logout', (req, res) => {
+    res.clearCookie('token');
+    res.json('logged out user');
+  });
+
   app.get('/api/ingredient/search/:ingredientName', (req, res) => {
     const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5&apiKey=`;
     const apiKey = process.env.SPOONACULAR_KEY;

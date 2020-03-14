@@ -10,6 +10,10 @@ export default {
     return axios.post(`/api/user/login/${userName}/${password}`);
   },
 
+  logoutUser: () => {
+    return axios.get('/api/user/logout');
+  },
+
   getIngredients: (ingredientName) => {
     return axios.get(`/api/ingredient/search/${ingredientName}`)
   },
