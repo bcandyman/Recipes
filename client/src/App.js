@@ -7,7 +7,7 @@ import Profile from './Pages/Profile';
 import NoMatch from './Pages/NoMatch';
 import { Navbar } from 'react-bootstrap'
 import './App.css'
-import RecipeList from './Pages/RecipeList';
+import Recipes from './Pages/Recipes';
 import Deets from './Pages/Deets'
 import CustomNavbar from './components/NavBar'
 
@@ -27,7 +27,7 @@ function App() {
         <Route exact path='/signup' render={(props) => <Signup onHandleUserActivate={onHandleUserActivate} />} />
         <Route exact path='/login' userId={userId} component={Login} />
         <Route exact path='/profile' component={Profile} />
-        <Route exact path='/recipelist' component={RecipeList} />
+        <Route exact path='/Recipes' component={Recipes} />
         <Route exact path='/recipedetails' component={Deets} />
         <Route component={NoMatch} />
       </Switch>

@@ -3,12 +3,10 @@ const axios = require('axios');
 require('dotenv').config();
 
 
-const getSpoonacular = (endPoints) => {
-  return axios.get(`https://api.spoonacular.com${endPoints}&apiKey=${process.env.SPOONACULAR_KEY}`)
-};
+const getSpoonacular = (endPoints) => axios.get(`https://api.spoonacular.com${endPoints}&apiKey=${process.env.SPOONACULAR_KEY}`);
 
 app
-  .route('/spoonacular/recipe/:name')
+  .route('/spoonacular/recipeByName/:name')
   .get((req, res) => {
     getSpoonacular(`/recipes/search?query=${req.params.name}&number=2&instructionsRequired=true`)
       .then(response => {
@@ -18,6 +16,14 @@ app
         });
         res.send(updatedData);
       });
+  });
+
+
+app
+  .route('/spoonacular/recipeByIngredient/:ingredient')
+  .get((req, res) => {
+    getSpoonacular(`/recipes/findByIngredients?ingredients=${req.params.ingredient}&number=5&instructionsRequired=true`)
+      .then(response => res.send(response.data));
   });
 
 
