@@ -28,7 +28,7 @@ function Login() {
       <Row>
         <Col md={6}>
           <Card className="signup-card">
-            <Card.Title className="text-center py-3">Create an Account</Card.Title>
+            <Card.Title className="text-center py-3">Login to your Account</Card.Title>
             <Form onSubmit={handleOnSubmit}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
