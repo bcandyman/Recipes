@@ -60,7 +60,7 @@ function Signup({ onHandleUserActivate }) {
                   </Form.Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Form.Control name='password' placeholder="password"></Form.Control>
+                  <Form.Control type="password" name='password' placeholder="password"></Form.Control>
                 </ListGroup.Item>
               </ListGroup>
               <Button type="submit" className="mx-3 my-3">Submit</Button>
