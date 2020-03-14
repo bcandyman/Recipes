@@ -3,6 +3,7 @@ require('./config/connection');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,10 +21,8 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-
 // Routes
-require('./routes/apiRoutes')(app);
+app.use(routes);
 
 
 // Starting the server
