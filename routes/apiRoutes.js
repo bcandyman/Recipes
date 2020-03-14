@@ -27,21 +27,26 @@ module.exports = app => {
 
   app.get('/api/user/authenticate', (req, res) => res.json(req.user));
 
-  app.post('/api/user/login/:userName/:password', async (req, res) => {
+  app.post('/api/user/login/:userName/:password', (req, res) => {
     userController.newFindOne({ userName: req.params.userName })
       .then(incomingData => {
-        if (!incomingData.userName) {
+        if (!incomingData) {
           res.json('NO USER FOUND WITH THAT EMAIL');
         }
 
-        const valid = bcrypt.compare(req.params.password, incomingData.password);
-
-        if (!valid) {
-          res.json('INCORRECT PASSWORD ENTERED');
-        }
-
-        signCookie(incomingData.id, res).then(() => res.json('user'));
-      });
+        bcrypt.compare(req.params.password, incomingData.password)
+          .then(result => {
+            if (result) {
+              signCookie(incomingData.id, res)
+                .then(() => res.sendStatus(200))
+                .catch(err => console.log(err));
+            } else {
+              res.json('INCORRECT PASSWORD ENTERED');
+            }
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   });
 
   app.post('/api/user/signup', async (req, res) => {
