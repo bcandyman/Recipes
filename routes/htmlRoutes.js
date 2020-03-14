@@ -64,23 +64,23 @@ const dummyPantryData = [
 
 module.exports = app => {
   // This is the route to log in the user.
-  app.get('/login', (req, res) => {
-    res.render('index', { title: 'Login' });
-  });
+  // app.get('/login', (req, res) => {
+  //   res.render('index', { title: 'Login' });
+  // });
 
   // Redirect '/' route to '/login'
-  app.get('/', (req, res) => {
-    res.redirect('/login');
-  });
+  // app.get('/', (req, res) => {
+  //   res.redirect('/login');
+  // });
 
   // This route should display all ingredients of the user
-  app.get('/pantry/manage', (req, res) => {
-    res.render('pantry', {
-      title: 'Pantry',
-      showNavBar: true,
-      data: dummyPantryData,
-    });
-  });
+  // app.get('/pantry/manage', (req, res) => {
+  //   res.render('pantry', {
+  //     title: 'Pantry',
+  //     showNavBar: true,
+  //     data: dummyPantryData,
+  //   });
+  // });
 
   // This route should display recipes that the user currently has in their database
   app.get('/recipes/pantry', (req, res) => {
@@ -100,43 +100,43 @@ module.exports = app => {
   });
 
   // this route should update the quantity of an ingredient item in the database
-  app.put('/pantry/ingredient/update', (req, res) => {
-    setTimeout(() => {
-      res.send({ redirect: '/pantry/manage' });
-    }, 1000);
-  });
+  // app.put('/pantry/ingredient/update', (req, res) => {
+  //   setTimeout(() => {
+  //     res.send({ redirect: '/pantry/manage' });
+  //   }, 1000);
+  // });
 
   // this route should remove an ingredient item in the database
-  app.delete('/pantry/ingredient/remove', (req, res) => {
-    const itemId = req.body.ingredientId;
-    setTimeout(() => {
-      res.send({ redirect: '/pantry/manage' });
-    }, 1000);
-  });
+  // app.delete('/pantry/ingredient/remove', (req, res) => {
+  //   const itemId = req.body.ingredientId;
+  //   setTimeout(() => {
+  //     res.send({ redirect: '/pantry/manage' });
+  //   }, 1000);
+  // });
 
   // This route should display recipes that were searched by the user
-  app.get('/recipes/search/name/:recipeName?', (req, res) => {
-    const { recipeName } = req.params;
-    const url = `https://api.spoonacular.com/recipes/search?query=${recipeName}&number=2&instructionsRequired=true&apiKey=${process.env.SPOONACULAR_KEY}`;
-    axios.get(url).then(response => {
-      // Prepend baseUrl to image url.
-      const baseImageUrl = response.data.baseUri;
-      response.data.results.forEach((val, ind) => {
-        const imagePath = response.data.results[ind].image;
-        response.data.results[ind].image = baseImageUrl + imagePath;
-      });
+  // app.get('/recipes/search/name/:recipeName?', (req, res) => {
+  //   const { recipeName } = req.params;
+  //   const url = `https://api.spoonacular.com/recipes/search?query=${recipeName}&number=2&instructionsRequired=true&apiKey=${process.env.SPOONACULAR_KEY}`;
+  //   axios.get(url).then(response => {
+  //     // Prepend baseUrl to image url.
+  //     const baseImageUrl = response.data.baseUri;
+  //     response.data.results.forEach((val, ind) => {
+  //       const imagePath = response.data.results[ind].image;
+  //       response.data.results[ind].image = baseImageUrl + imagePath;
+  //     });
 
-      const data = response.data.results;
-      res.render('recipes', {
-        title: 'Recipes',
-        header: 'Search by Recipe Name',
-        showNavBar: true,
-        showSearchByName: true,
-        excludeSearchByName: true,
-        data: data
-      });
-    });
-  });
+  //     const data = response.data.results;
+  //     res.render('recipes', {
+  //       title: 'Recipes',
+  //       header: 'Search by Recipe Name',
+  //       showNavBar: true,
+  //       showSearchByName: true,
+  //       excludeSearchByName: true,
+  //       data: data
+  //     });
+  //   });
+  // });
 
   // this route displays all details of a recipe
   app.get('/recipe/details/:id', (req, res) => {
@@ -178,7 +178,7 @@ module.exports = app => {
     }
   });
 
-  app.get('/*', (req, res) => {
-    res.render('404');
-  });
+  // app.get('/*', (req, res) => {
+  //   res.render('404');
+  // });
 };

@@ -29,4 +29,8 @@ export default {
   addUserIngredient: (userId, ingredientName) => {
     return axios.post(`/api/user/ingredient/${userId}/${ingredientName}`)
   },
+
+  getRecipesByName: (name) => {
+    return axios.get(`/spoonacular/recipe/${name}`)
+  }
 };

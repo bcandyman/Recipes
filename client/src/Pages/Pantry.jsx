@@ -14,8 +14,6 @@ import {
 import AuthComponent from '../components/AuthenticationComponent'
 
 function Pantry({ userId, onHandleUserActivate }) {
-  console.log('userId++++++++++++++++');
-  console.log(userId);
 
   // contains ingredients returned from API from searching for new ingredients
   const [ingredients, setIngredients] = useState([]);
