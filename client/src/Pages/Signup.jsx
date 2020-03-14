@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -12,17 +13,28 @@ import API from '../utils/API';
 
 function Signup({ onHandleUserActivate }) {
 
+  const history = useHistory();
+
   const handleOnSubmit = e => {
     e.preventDefault()
 
-    API.createNewUser({
+    const userData = {
       userName: e.target.userName.value,
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
       password: e.target.password.value
-    }).then(data => {
-      console.log('data.data.id')
-      onHandleUserActivate(data.data.id)
+    }
+
+    if (!userData.userName || !userData.firstName || !userData.lastName || !userData.password) {
+      alert('All fields must be populated')
+      return
+    }
+
+    API.createNewUser(userData).then(data => {
+      if (data.data.id) {
+        onHandleUserActivate(data.data.id);
+        history.push('/pantry');
+      }
     });
   }
 

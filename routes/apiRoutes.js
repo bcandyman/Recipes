@@ -12,37 +12,24 @@ const pushIngredientToUser = (userId, ingredientId, res) => {
     .catch(err => res.send(err));
 };
 
+const signCookie = (userId, res) => new Promise((resolve, reject) => {
+  const token = jwt.sign({ id: userId }, process.env.APP_SECRET);
+
+  res.cookie('token', token, {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+  });
+  resolve(res);
+});
+
 
 module.exports = app => {
-  // app.post('/api/user/create', (req, res) => {
-  //   res.send('userId');
-  // });
 
   app.get('/api/user/authenticate', (req, res) => res.json(req.user));
 
-
-
-
-
-
-
   app.post('/api/user/login/:userName/:password', async (req, res) => {
-    console.log('99999999999999999999');
-    console.log(req.params.userName);
-    console.log(req.params.password);
-    console.log('))))))))))))))(((((((((((((((');
-
     userController.newFindOne({ userName: req.params.userName })
       .then(incomingData => {
-        console.log(incomingData);
-
-
-        // const user = await db.User.findOne({
-        // where: {
-        // email: req.body.email
-        // }
-        // });
-
         if (!incomingData.userName) {
           res.json('NO USER FOUND WITH THAT EMAIL');
         }
@@ -53,32 +40,11 @@ module.exports = app => {
           res.json('INCORRECT PASSWORD ENTERED');
         }
 
-        // //create our cookie
-        const token = jwt.sign({ id: incomingData.id }, process.env.APP_SECRET);
-
-        res.cookie('token', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24 * 365,
-        });
-
-        res.json('user');
+        signCookie(incomingData.id, res).then(() => res.json('user'));
       });
   });
 
-
-
-
-
-
-
-
-
-
   app.post('/api/user/signup', async (req, res) => {
-    // const email = req.body.email.toLowerCase();
-
-    // //hash our password
-    // bcrypt.hash(req.body.password, 10).then((data) => { });
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     const data = {
       firstName: req.body.firstName,
@@ -90,12 +56,7 @@ module.exports = app => {
     // // //create the user in the database
     userController.create({ data })
       .then(incomingData => {
-        const token = jwt.sign({ id: incomingData.id }, process.env.APP_SECRET);
-        res.cookie('token', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24 * 365,
-        });
-        res.json({ id: incomingData.id });
+        signCookie(incomingData.id, res).then(() => res.json({ id: incomingData.id }));
       })
       .catch(err => res.send(err));
   });

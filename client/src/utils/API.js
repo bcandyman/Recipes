@@ -7,8 +7,6 @@ export default {
   },
 
   getUser: (userName, password) => {
-    // console.log(userData);
-    // return
     return axios.post(`/api/user/login/${userName}/${password}`);
   },
 

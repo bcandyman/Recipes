@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-    Card,
+    // Card,
     Container,
     Row,
-    Col
+    // Col
 } from 'react-bootstrap'
 
 export default function RecipeList () {

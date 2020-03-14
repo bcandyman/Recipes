@@ -14,6 +14,7 @@ const userSchema = new Schema({
   userName: {
     type: String,
     required: true,
+    // unique: true,
   },
   password: {
     type: String,
@@ -24,7 +25,6 @@ const userSchema = new Schema({
       ingredientId: {
         type: Schema.Types.ObjectId,
         ref: 'Ingredient',
-        // unique: true,
       },
       quantity: {
         type: Number,
@@ -33,7 +33,8 @@ const userSchema = new Schema({
       unit: {
         type: String,
       },
-    }],
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);

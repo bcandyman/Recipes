@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -12,20 +13,14 @@ import API from '../utils/API';
 
 function Login() {
 
+  const history = useHistory();
+
   const handleOnSubmit = e => {
     e.preventDefault()
-
-
-    console.log(e.target.userName.value);
-    console.log(e.target.password.value);
-
     API.getUser(
       e.target.userName.value,
       e.target.password.value
-    ).then(data => {
-      console.log('data.data.id')
-      // onHandleUserActivate(data.data.id)
-    });
+    ).then(data => history.push('/pantry'));
   }
 
   return (
@@ -50,8 +45,6 @@ function Login() {
       </Row>
     </Container>
   )
-
-
 }
 
 export default Login
