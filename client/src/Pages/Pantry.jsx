@@ -9,13 +9,11 @@ import {
   Container,
   Card,
   Form,
-  Spinner
+  // Spinner
 } from 'react-bootstrap'
 import AuthComponent from '../components/AuthenticationComponent'
 
 function Pantry({ userId, onHandleUserActivate }) {
-  console.log('userId++++++++++++++++');
-  console.log(userId);
 
   // contains ingredients returned from API from searching for new ingredients
   const [ingredients, setIngredients] = useState([]);
@@ -33,10 +31,12 @@ function Pantry({ userId, onHandleUserActivate }) {
     }
   }, [updatedItems, userId]);
 
+
   useEffect(() => {
     API.getIngredients(search)
       .then(res => setIngredients(res.data));
   }, [search]);
+
 
   const handleOnKeyUp = e => {
     if (e.target.value !== '') {
@@ -47,9 +47,8 @@ function Pantry({ userId, onHandleUserActivate }) {
     }
   };
 
-  const handleOnAdd = e => {
-    console.log(userIngredients);
 
+  const handleOnAdd = e => {
     if (userIngredients === undefined) {
       API.addUserIngredient(userId, e.target.value)
         .then(() => setUpdatedItems(updatedItems + 1));
@@ -63,15 +62,12 @@ function Pantry({ userId, onHandleUserActivate }) {
     }
   };
 
+
   const handleOnRemove = e => {
     API.removeUserIngredient(userId, e.target.value)
       .then(() => setUpdatedItems(updatedItems + 1));
   };
 
-
-  // const  handleUserActivate=(d)=>{
-  //   console.log(d)
-  // }
 
   return (
     <AuthComponent onHandleUserActivate={onHandleUserActivate} userId={userId}>

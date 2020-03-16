@@ -2,8 +2,6 @@ import React from 'react'
 import {
     Card,
     Container,
-    Row,
-    Col,
     Table,
     Button
 } from 'react-bootstrap'

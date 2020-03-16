@@ -3,6 +3,7 @@ require('./config/connection');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,13 +21,9 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-
 // Routes
-require('./routes/apiRoutes')(app);
+app.use(routes);
 
 
 // Starting the server
 app.listen(PORT, () => console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT));
-
-// module.exports = app;

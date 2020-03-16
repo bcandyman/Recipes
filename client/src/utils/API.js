@@ -7,9 +7,11 @@ export default {
   },
 
   getUser: (userName, password) => {
-    // console.log(userData);
-    // return
     return axios.post(`/api/user/login/${userName}/${password}`);
+  },
+
+  logoutUser: () => {
+    return axios.get('/api/user/logout');
   },
 
   getIngredients: (ingredientName) => {
@@ -27,4 +29,8 @@ export default {
   addUserIngredient: (userId, ingredientName) => {
     return axios.post(`/api/user/ingredient/${userId}/${ingredientName}`)
   },
+
+  getRecipesByName: (name) => {
+    return axios.get(`/spoonacular/recipe/${name}`)
+  }
 };

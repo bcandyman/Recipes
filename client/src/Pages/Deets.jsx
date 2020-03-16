@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-    Card,
+    // Card,
     Container,
     Row,
     Col,
-    Table
+    // Table
 } from 'react-bootstrap'
 import RecipeDetails from '../components/RecipeDetails'
 
