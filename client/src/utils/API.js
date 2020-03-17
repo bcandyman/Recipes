@@ -37,4 +37,8 @@ export default {
   getRecipesByIngredient: (ingredient) => {
     return axios.get(`/spoonacular/recipeByIngredient/${ingredient}`)
   },
+
+  getRecipesDetails: (recipeId) => {
+    return axios.get(`/spoonacular/recipe/details/${recipeId}`)
+  },
 };
