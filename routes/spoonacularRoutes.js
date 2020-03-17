@@ -5,6 +5,7 @@ require('dotenv').config();
 // this function makes all spoonacular api calls
 const getSpoonacular = (endPoints) => axios.get(`https://api.spoonacular.com${endPoints}&apiKey=${process.env.SPOONACULAR_KEY}`);
 
+
 app // search for a spoonacular recipe by name
   .route('/spoonacular/recipeByName/:name')
   .get((req, res) => {
@@ -30,7 +31,7 @@ app // search for a spoonacular recipe by ingredient(s)
 app // search for recipe details by a recipe id
   .route('/spoonacular/recipe/details/:recipeId')
   .get((req, res) => {
-    getSpoonacular(`/recipes/?${req.params.recipeId}/information`)
+    getSpoonacular(`/recipes/${req.params.recipeId}/information?`)
       .then(response => res.send(response.data));
   });
 
