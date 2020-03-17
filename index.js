@@ -26,4 +26,4 @@ app.use(routes);
 
 
 // Starting the server
-app.listen(PORT, () => console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
