@@ -10,12 +10,12 @@ const pushIngredientToUser = (userId, ingredientId, res) => {
 };
 
 
-app
+app // route is used for autopopulate while searching for ingredients
   .route('/ingredient/search')
   .get((req, res) => res.send([]));
 
 
-app
+app // grabs user information along with user's populated ingredient list
   .route('/user/ingredients/:userId')
   .get((req, res) => {
     userController.newFindOne({ _id: req.params.userId })
@@ -25,19 +25,17 @@ app
   });
 
 
-app
+app // creates a new ingredient item within the ingredients collection
   .route('/pantry/ingredient')
   .post((req, res) => ingredientController.findOneOrCreate({ name: req.body.name }, res));
 
 
-// create a new user
-app
+app // creates a new user profile
   .route('/user')
   .post((req, res) => userController.create(req.body, res));
 
 
-// add an ingredient item to the user
-app
+app // add an ingredient item to the user's collection
   .route('/user/ingredient/:userId/:ingredientName')
   .post((req, res) => {
     ingredientController.newFindOne({ name: req.params.ingredientName })
@@ -55,8 +53,8 @@ app
       .catch(err => res.send(err));
   });
 
-// remove an ingredient item from the user
-app
+
+app // remove an ingredient item from the user's collection
   .route('/user/ingredient/:userId/:ingredientId')
   .delete((req, res) => {
     userController.newRemoveIngredient(req.params.userId, req.params.ingredientId)
