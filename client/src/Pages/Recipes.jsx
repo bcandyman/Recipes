@@ -1,48 +1,24 @@
 import React, { useState } from 'react';
 import {
-  Form,
   Container,
   Row,
   Col,
-  ListGroup,
-  Button,
 } from 'react-bootstrap';
-import API from '../utils/API';
 import RecipeList from '../components/RecipeList';
 import RecipeByName from '../components/RecipeByName';
 import RecipeByIngredient from '../components/RecipeByIngredient';
 import SearchBar from '../components/CustomButtonGroup';
+import { useHistory, Redirect } from 'react-router-dom';
 
-export default function RecipeSearch() {
+export default function RecipeSearch({ searchBy }) {
 
+  const history = useHistory();
   const [queryType, setQueryType] = useState('name')
-  const [recipes, setRecipes] = useState([])
 
   const handleOnClick = e => {
     setQueryType(e.target.value);
-    setRecipes([]);
+    history.push(`/recipes/search/${e.target.value}`)
   }
-
-  const getRecipes = e => {
-    e.preventDefault()
-
-    switch (queryType) {
-      case 'name':
-        API.getRecipesByName(e.target.recipeName.value)
-          .then(results => setRecipes(results.data))
-          .catch(err => console.log(err))
-        break;
-
-      case 'ingredient':
-        API.getRecipesByIngredient(e.target.recipeIngredient.value)
-          .then(results => setRecipes(results.data))
-          .catch(err => console.log(err))
-        break;
-
-      default:
-    }
-  }
-
 
   const searchBarButtons = [
     {
@@ -51,7 +27,7 @@ export default function RecipeSearch() {
     },
     {
       caption: 'By Ingredient',
-      value: 'ingredient',
+      value: 'ingredients',
     },
   ]
 
@@ -63,18 +39,8 @@ export default function RecipeSearch() {
           <SearchBar className='mb-3' buttons={searchBarButtons} handleOnClick={handleOnClick} />
         </Col>
       </Row>
-      <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <Form onSubmit={getRecipes}>
-            <ListGroup variant="flush">
-              {queryType === 'name' ? <RecipeByName /> : null}
-              {queryType === 'ingredient' ? <RecipeByIngredient /> : null}
-            </ListGroup>
-            <Button type="submit" className="mx-3 my-3">Search</Button>
-          </Form>
-        </Col>
-      </Row>
-      <RecipeList recipes={recipes} />
+      {queryType === 'name' ? <RecipeByName /> : null}
+      {queryType === 'ingredients' ? <RecipeByIngredient /> : null}
     </Container>
   )
 }

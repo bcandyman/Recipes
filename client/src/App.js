@@ -28,6 +28,8 @@ function App() {
         <Route exact path='/login' userId={userId} component={Login} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/Recipes' component={Recipes} />
+        <Route exact path='/recipes/search/ingredients/:ingredients?' render={(props) => <Recipes searchBy='ingredient' />} />
+        <Route exact path='/recipes/search/name/:name?' render={(props) => <Recipes searchBy='name' />} />
         <Route exact path='/recipe/details/:recipeId' component={Deets} />
         <Route component={NoMatch} />
       </Switch>
