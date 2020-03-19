@@ -10,6 +10,6 @@ const recipeSchema = new Schema({
     preperationMinutes: { type: Number, required: true }
 });
 
-const Recipe = mongoose.model('Recipe', ingredientSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
 module.exports = Recipe;
