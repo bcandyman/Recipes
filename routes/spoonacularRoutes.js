@@ -1,5 +1,7 @@
 const app = require('express').Router();
 const axios = require('axios');
+const recipeController = require('../controllers/recipeController')
+
 require('dotenv').config();
 
 // this function makes all spoonacular api calls
@@ -42,5 +44,11 @@ app // search for recipe ingredients
     getSpoonacular(`/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5`)
       .then(response => res.send(response.data));
   });
+
+
+app // creates a new Recipe item within the recipe collection
+.route('/pantry/recipe/')
+.post((req, res) => recipeController.findOneOrCreate({ name: req.body.name }, res));  
+
 
 module.exports = app;

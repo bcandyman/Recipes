@@ -17,6 +17,7 @@ export default {
   getIngredients: (ingredientName) => {
     return axios.get(`/api/ingredient/search/${ingredientName}`)
   },
+  
 
   getUserIngredients: (userId) => {
     return axios.get(`api/user/ingredients/${userId}`);
@@ -28,6 +29,11 @@ export default {
 
   addUserIngredient: (userId, ingredientName) => {
     return axios.post(`/api/user/ingredient/${userId}/${ingredientName}`)
+  },
+
+  // Route to save recipeId to user's collection
+  addUserRecipe: (userId, recipeId) => {
+    return axios.get(`/api/user/recipe/${userId}/${recipeId}`)
   },
 
   getRecipesByName: (name) => {

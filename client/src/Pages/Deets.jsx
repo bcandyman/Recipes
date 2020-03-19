@@ -21,7 +21,9 @@ export default function Deets() {
 
   useEffect(() => {
     API.getRecipesDetails(recipeId)
-      .then(res => setRecipeData(res.data))
+      .then(res => {
+        setRecipeData(res.data)
+      })
       .catch(err => console.log(err));
   }, [])
 
