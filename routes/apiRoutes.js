@@ -10,9 +10,9 @@ const pushIngredientToUser = (userId, ingredientId, res) => {
 };
 
 
-app // route is used for autopopulate while searching for ingredients
-  .route('/ingredient/search')
-  .get((req, res) => res.send([]));
+// app // route is used for autopopulate while searching for ingredients
+//   .route('/ingredient/search')
+//   .get((req, res) => res.send([]));
 
 
 app // grabs user information along with user's populated ingredient list
