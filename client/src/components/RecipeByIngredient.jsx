@@ -41,7 +41,7 @@ export default function RecipeSearch() {
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <Form onSubmit={getRecipes}>
-            <CustomButtonGroup buttons={buttonGroupButtons} />
+            {/* <CustomButtonGroup buttons={buttonGroupButtons} /> */}
             <Form.Control placeholder='Recipe ingredient' name="recipeIngredient"></Form.Control>
             <Button type="submit" className="mx-3 my-3">Search</Button>
           </Form>
