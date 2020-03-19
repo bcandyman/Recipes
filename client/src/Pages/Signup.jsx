@@ -41,7 +41,7 @@ function Signup({ onHandleUserActivate }) {
   return (
     <Container>
       <Row>
-        <Col md={6}>
+        <Col sm={{ span: 8, offset: 2 }} md={{ span: 8, offset: 2 }}>
           <Card className="signup-card">
             <Card.Title className="text-center py-3">Create an Account</Card.Title>
             <Form onSubmit={handleOnSubmit}>
