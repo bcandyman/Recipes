@@ -37,7 +37,7 @@ app // search for recipe details by a recipe id
 
 
 app // search for recipe ingredients
-  .route('/ingredient/search/:ingredientName')
+  .route('/api/ingredient/search/:ingredientName')
   .get((req, res) => {
     getSpoonacular(`/food/ingredients/autocomplete?query=${req.params.ingredientName}&number=5`)
       .then(response => res.send(response.data));
