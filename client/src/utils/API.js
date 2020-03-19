@@ -19,7 +19,7 @@ export default {
   },
 
   getUserIngredients: (userId) => {
-    return axios.get(`api/user/ingredients/${userId}`);
+    return axios.get(`/api/user/ingredients/${userId}`);
   },
 
   removeUserIngredient: (userId, ingredientId) => {

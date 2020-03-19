@@ -6,10 +6,11 @@ import {
 } from 'react-bootstrap';
 import RecipeByName from '../components/RecipeByName';
 import RecipeByIngredient from '../components/RecipeByIngredient';
+import RecipeByPantry from '../components/RecipeByPantry';
 import SearchBar from '../components/CustomButtonGroup';
 import { useHistory } from 'react-router-dom';
 
-export default function RecipeSearch({ searchBy }) {
+function Recipes({ searchBy, userId, onHandleUserActivate }) {
 
   const history = useHistory();
   const [queryType, setQueryType] = useState('')
@@ -28,6 +29,10 @@ export default function RecipeSearch({ searchBy }) {
       caption: 'By Ingredient',
       value: 'ingredients',
     },
+    {
+      caption: 'By Pantry',
+      value: 'pantry',
+    },
   ]
 
   return (
@@ -40,6 +45,9 @@ export default function RecipeSearch({ searchBy }) {
       </Row>
       {queryType === 'name' ? <RecipeByName /> : null}
       {queryType === 'ingredients' ? <RecipeByIngredient /> : null}
+      {queryType === 'pantry' ? <RecipeByPantry userId={userId} onHandleUserActivate={onHandleUserActivate} /> : null}
     </Container>
   )
 }
+
+export default Recipes;

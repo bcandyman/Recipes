@@ -25,12 +25,12 @@ function App() {
       <Switch>
         <Route exact path='/pantry' render={(props) => <Pantry userId={userId} onHandleUserActivate={onHandleUserActivate} />} />
         <Route exact path={['/', '/signup']} render={(props) => <Signup onHandleUserActivate={onHandleUserActivate} />} />
-        < Route exact path='/login' userId={userId} component={Login} />
+        <Route exact path='/login' userId={userId} component={Login} />
         <Route exact path='/profile' component={Profile} />
-        {/* <Route exact path='/Recipes' component={Recipes} /> */}
-        < Route exact path='/recipes/search' render={(props) => <Recipes />} />
+        <Route exact path='/recipes/search' render={(props) => <Recipes />} />
         <Route exact path='/recipes/search/ingredients/:ingredients?' render={(props) => <Recipes searchBy='ingredient' />} />
         <Route exact path='/recipes/search/name/:name?' render={(props) => <Recipes searchBy='name' />} />
+        <Route exact path='/recipes/search/pantry' render={(props) => <Recipes userId={userId} onHandleUserActivate={onHandleUserActivate} searchBy='pantry' />} />
         <Route exact path='/recipe/details/:recipeId' component={Deets} />
         <Route component={NoMatch} />
       </Switch>
