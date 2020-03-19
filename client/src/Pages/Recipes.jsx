@@ -4,16 +4,15 @@ import {
   Row,
   Col,
 } from 'react-bootstrap';
-import RecipeList from '../components/RecipeList';
 import RecipeByName from '../components/RecipeByName';
 import RecipeByIngredient from '../components/RecipeByIngredient';
 import SearchBar from '../components/CustomButtonGroup';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function RecipeSearch({ searchBy }) {
 
   const history = useHistory();
-  const [queryType, setQueryType] = useState('name')
+  const [queryType, setQueryType] = useState('')
 
   const handleOnClick = e => {
     setQueryType(e.target.value);

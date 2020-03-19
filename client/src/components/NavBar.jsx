@@ -5,7 +5,6 @@ import { Navbar, NavDropdown, Button } from 'react-bootstrap'
 import API from '../utils/API';
 
 function CustomNavbar() {
-
   const history = useHistory();
 
   const logout = () => {
@@ -29,12 +28,12 @@ function CustomNavbar() {
         <LinkContainer to="/profile">
           <NavDropdown.Item>My Profile</NavDropdown.Item>
         </LinkContainer>
-        <LinkContainer to="/recipelist">
-          <NavDropdown.Item>My Recipes</NavDropdown.Item>
+        <LinkContainer to="/recipes/search">
+          <NavDropdown.Item>Find Recipes</NavDropdown.Item>
         </LinkContainer>
-        <LinkContainer to="/recipedetails">
-          <NavDropdown.Item>Recipe Details</NavDropdown.Item>
-        </LinkContainer>
+        {/* <LinkContainer to="/recipedetails"> */}
+          {/* <NavDropdown.Item>Recipe Details</NavDropdown.Item> */}
+        {/* </LinkContainer> */}
         <NavDropdown.Item>
           <Button onClick={logout}>Log out</Button>
         </NavDropdown.Item>
