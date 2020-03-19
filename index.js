@@ -21,6 +21,12 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// serve up static assets
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // Routes
 app.use(routes);
 
