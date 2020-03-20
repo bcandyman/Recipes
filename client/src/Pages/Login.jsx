@@ -26,7 +26,7 @@ function Login() {
   return (
     <Container>
       <Row>
-        <Col md={6}>
+        <Col sm={{ span: 8, offset: 2 }} md={{ span: 6, offset: 3 }}>
           <Card className="signup-card">
             <Card.Title className="text-center py-3">Login to your Account</Card.Title>
             <Form onSubmit={handleOnSubmit}>

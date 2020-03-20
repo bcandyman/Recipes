@@ -19,7 +19,7 @@ export default {
   },
 
   getUserIngredients: (userId) => {
-    return axios.get(`api/user/ingredients/${userId}`);
+    return axios.get(`/api/user/ingredients/${userId}`);
   },
 
   removeUserIngredient: (userId, ingredientId) => {
@@ -31,6 +31,14 @@ export default {
   },
 
   getRecipesByName: (name) => {
-    return axios.get(`/spoonacular/recipe/${name}`)
-  }
+    return axios.get(`/spoonacular/recipeByName/${name}`)
+  },
+
+  getRecipesByIngredient: (ingredient) => {
+    return axios.get(`/spoonacular/recipeByIngredient/${ingredient}`)
+  },
+
+  getRecipesDetails: (recipeId) => {
+    return axios.get(`/spoonacular/recipe/details/${recipeId}`)
+  },
 };

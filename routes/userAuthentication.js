@@ -63,7 +63,8 @@ app
       .catch(err => res.send(err));
   });
 
-app.route('/logout')
+app
+  .route('/logout')
   .get((req, res) => {
     res.clearCookie('token');
     res.json('logged out user');
